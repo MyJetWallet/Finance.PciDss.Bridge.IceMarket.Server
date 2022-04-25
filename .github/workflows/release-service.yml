@@ -61,7 +61,8 @@ jobs:
       with:
         username: ${{ secrets.ST_DOCKER_USER }}
         password: ${{ secrets.ST_DOCKER_PASSWORD }}
-        path: ./${{ github.event.repository.name }}
+        path: ./publish-api
+#         path: ./${{ github.event.repository.name }}
         registry: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
         repository: pci-dss/${{ steps.string.outputs.lowercase }}
         tags: ${{ steps.branches.outputs.value }}
