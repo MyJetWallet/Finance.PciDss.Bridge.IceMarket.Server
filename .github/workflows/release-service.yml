@@ -50,7 +50,7 @@ jobs:
       run: ls
 
     - name: Publish Service
-      run: dotnet publish ./${{ github.event.repository.name }}/${{ github.event.repository.name }}.csproj --configuration Release /p:AssemblyVersion=${{ steps.branches.outputs.value }} --output ./publish-api
+      run: dotnet publish ./${{ github.event.repository.name }}/${{ github.event.repository.name }}.csproj --configuration Release /p:AssemblyVersion=${{ steps.branches.outputs.value }} --output ${{ github.event.repository.name }}
 
     - name: Check Service dir
       run: ls ./publish-api
@@ -61,8 +61,7 @@ jobs:
       with:
         username: ${{ secrets.ST_DOCKER_USER }}
         password: ${{ secrets.ST_DOCKER_PASSWORD }}
-        path: ./publish-api
-#         path: ./${{ github.event.repository.name }}
+        path: ./${{ github.event.repository.name }}
         registry: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
         repository: pci-dss/${{ steps.string.outputs.lowercase }}
         tags: ${{ steps.branches.outputs.value }}
